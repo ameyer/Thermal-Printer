@@ -1,7 +1,7 @@
 # Thermal Printer
 Arduino code for a serial/UART thermal printer https://www.sparkfun.com/products/10438
 
-For complete hookup and tutorial see bildr.org: http://bildr.org/2011/08/thermal-printer-arduino/
+For complete hookup and tutorial see: http://adam-meyer.com/arduino/thermal-printer-arduino/
 
 The code is provided under the MIT license please use, edit, change, and share. 
 
