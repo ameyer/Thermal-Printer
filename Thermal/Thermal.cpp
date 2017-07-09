@@ -3,9 +3,7 @@
 
 
 
-Thermal::Thermal(int RX_Pin, int TX_Pin, long baudRate) : SoftwareSerial(RX_Pin, TX_Pin)
-
-{
+Thermal::Thermal(int RX_Pin, int TX_Pin, long baudRate) : SoftwareSerial(RX_Pin, TX_Pin){
 
 	pinMode(RX_Pin, INPUT);
 
@@ -32,9 +30,7 @@ Thermal::Thermal(int RX_Pin, int TX_Pin, long baudRate) : SoftwareSerial(RX_Pin,
 	setDefault();
 }
 
-void Thermal::setDefault()
-
-{
+void Thermal::setDefault(){
 	wake();
 	justify('L');
 	inverseOff();
@@ -46,18 +42,14 @@ void Thermal::setDefault()
 	setSize('s');
 }
 
-void Thermal::test()
-
-{
+void Thermal::test(){
 	println("Hello World!");
 	feed(2);
 }
 
 
 
-void Thermal::setBarcodeHeight(int val)
-
-{
+void Thermal::setBarcodeHeight(int val){
 	// default is 50
 	writeBytes(29, 104, val);
 }
@@ -88,63 +80,45 @@ void Thermal::printFancyBarcode(char * text){
   feed(2);
 }
 
-void Thermal::writeBytes(uint8_t a, uint8_t b)
-
-{
+void Thermal::writeBytes(uint8_t a, uint8_t b){
 	write(a);
 	write(b);
 }
 
-void Thermal::writeBytes(uint8_t a, uint8_t b, uint8_t c)
-
-{
+void Thermal::writeBytes(uint8_t a, uint8_t b, uint8_t c){
 	write(a);
 	write(b);
 	write(c);
 }
 
-void Thermal::writeBytes(uint8_t a, uint8_t b, uint8_t c, uint8_t d)
-
-{
+void Thermal::writeBytes(uint8_t a, uint8_t b, uint8_t c, uint8_t d){
 	write(a);
 	write(b);
 	write(c);
 	write(d);
 }
 
-void Thermal::inverseOn()
-
-{
+void Thermal::inverseOn(){
 	writeBytes(29, 'B', 1);
 }
 
-void Thermal::inverseOff()
-
-{
+void Thermal::inverseOff(){
 	writeBytes(29, 'B', 0, 10);
 }
 
-void Thermal::doubleHeightOn()
-
-{
+void Thermal::doubleHeightOn(){
 	writeBytes(27, 14);
 }
 
-void Thermal::doubleHeightOff()
-
-{
+void Thermal::doubleHeightOff(){
 	writeBytes(27, 20);
 }
 
-void Thermal::boldOn()
-
-{
+void Thermal::boldOn(){
 	writeBytes(27, 69, 1);
 }
 
-void Thermal::boldOff()
-
-{
+void Thermal::boldOff(){
 	writeBytes(27, 69, 0);
 	if (linefeedneeded)
 		feed();
@@ -152,9 +126,7 @@ void Thermal::boldOff()
 	linefeedneeded = false;
 }
 
-void Thermal::justify(char value)
-
-{
+void Thermal::justify(char value){
 	uint8_t pos = 0;
 
 
@@ -165,16 +137,12 @@ void Thermal::justify(char value)
 	writeBytes(0x1B, 0x61, pos);
 }
 
-void Thermal::feed(uint8_t x)
-
-{
+void Thermal::feed(uint8_t x){
 	while (x--)
 		write(10);
 }
 
-void Thermal::setSize(char value)
-
-{
+void Thermal::setSize(char value){
 	int size = 0;
 
 
@@ -188,66 +156,48 @@ void Thermal::setSize(char value)
 	//linefeedneeded = false;
 }
 
-void Thermal::underlineOff()
-
-{
+void Thermal::underlineOff(){
 	writeBytes(27, 45, 0, 10);
 }
 
 
-void Thermal::underlineOn()
-
-{
+void Thermal::underlineOn(){
 	writeBytes(27, 45, 1);
 }
 
-void Thermal::printBitmap(uint8_t w, uint8_t h,  const uint8_t *bitmap)
-
-{
+void Thermal::printBitmap(uint8_t w, uint8_t h,  const uint8_t *bitmap){
 	writeBytes(18, 42, h, w/8);
 	for (uint16_t i=0; i<(w/8) * h; i++) {
 		write(pgm_read_byte(bitmap + i));
 	}
 }
 
-void Thermal::wake()
-
-{
+void Thermal::wake(){
 	writeBytes(27, 61, 1);
 }
 
-void Thermal::sleep()
-
-{
+void Thermal::sleep(){
 		writeBytes(27, 61, 0);
 }
 
 ////////////////////// not working?
-void Thermal::tab()
-
-{
+void Thermal::tab(){
 	write(9);
 }
 
 
-void Thermal::setCharSpacing(int spacing)
-
-{
+void Thermal::setCharSpacing(int spacing){
 	writeBytes(27, 32, 0, 10);
 }
 
 
-void Thermal::setLineHeight(int val)
-
-{
+void Thermal::setLineHeight(int val){
 	writeBytes(27, 51, val); // default is 32
 }
 
 
 
-void Thermal::setHeatTime(int vHeatTime)
-
-{
+void Thermal::setHeatTime(int vHeatTime){
 
 	heatTime = vHeatTime;
 
@@ -265,9 +215,7 @@ void Thermal::setHeatTime(int vHeatTime)
 
 
 
-void Thermal::setHeatInterval(int vHeatInterval)
-
-{
+void Thermal::setHeatInterval(int vHeatInterval){
 
 	heatInterval = vHeatInterval;
 
@@ -285,9 +233,7 @@ void Thermal::setHeatInterval(int vHeatInterval)
 
 
 
-void Thermal::setPrintDensity(char vPrintDensity)
-
-{
+void Thermal::setPrintDensity(char vPrintDensity){
 
 	//Modify the print density and timeout
 
@@ -305,9 +251,7 @@ void Thermal::setPrintDensity(char vPrintDensity)
 
 
 
-void Thermal::setPrintBreakTime(char vPrintBreakTime)
-
-{
+void Thermal::setPrintBreakTime(char vPrintBreakTime){
 
 	//Modify the print density and timeout
 
